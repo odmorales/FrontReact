@@ -1,12 +1,26 @@
+import "./index.css"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
 import Formulario from './components/formulario';
 import GetPerson from './components/GetPerson';
 
-import "./index.css"
+
 
 function App() {
   return (
     <div className="App">
-      <Formulario />
+
+      <Router>
+        <Routes>
+          <Route path="/" exact element= { <Formulario /> } />
+          <Route path="/consultar" exact element= { <GetPerson /> } />
+        </Routes>
+      </Router>
+      {/* <GetPerson /> */}
     </div>
   );
 }

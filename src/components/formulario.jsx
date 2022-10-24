@@ -1,8 +1,12 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Formulario = () => {
+
+    let navigate = useNavigate();
 
     const {
         register,
@@ -11,15 +15,12 @@ export const Formulario = () => {
         formState: { errors }
       } = useForm();
       const onSubmit = (data) => {
-        console.log(data);
-        data.pulsaciones = 0;
-        axios.request({
-            method: 'Post',
-            url: 'http://127.0.0.1:8000/api/persona',
-            data: JSON.stringify(data)
-          }).then(response => {
-          }).catch(err => console.log(err));
-        
+        axios.post('http://127.0.0.1:8000/api/persona', data)
+            .then( response => {
+                console.log(response);
+            }).finally( (_) => {
+                navigate('/consultar');
+            });
       }; 
     
 
